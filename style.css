@@ -1,0 +1,44 @@
+ .glass-card {
+     background: rgba(35, 21, 16, 0.55);
+     backdrop-filter: blur(16px);
+     -webkit-backdrop-filter: blur(16px);
+     border: 1px solid rgba(212, 163, 115, 0.18);
+     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+ }
+
+ .glass-card:hover {
+     border-color: rgba(212, 163, 115, 0.45);
+     box-shadow: 0 12px 40px 0 rgba(212, 163, 115, 0.2);
+ }
+
+ .glass-nav {
+     background: rgba(18, 11, 9, 0.85);
+     backdrop-filter: blur(12px);
+     -webkit-backdrop-filter: blur(12px);
+     border-bottom: 1px solid rgba(212, 163, 115, 0.15);
+ }
+
+ /* Custom Scrollbar */
+ ::-webkit-scrollbar {
+     width: 8px;
+ }
+
+ ::-webkit-scrollbar-track {
+     background: #120b09;
+ }
+
+ ::-webkit-scrollbar-thumb {
+     background: #3a231b;
+     border-radius: 4px;
+ }
+
+ ::-webkit-scrollbar-thumb:hover {
+     background: #8c6d58;
+ }
+
+ /* Gradient Text */
+ .text-gradient {
+     background: linear-gradient(135deg, #ffffff 0%, #fefae0 35%, #d4a373 75%, #8c6d58 100%);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+ }

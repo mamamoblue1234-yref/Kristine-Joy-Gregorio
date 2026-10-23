@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: '#120b09',
+                        mocha: '#231510',
+                        chocolate: '#3a231b',
+                        cappuccino: '#8c6d58',
+                        amberGlow: '#d4a373',
+                        creme: '#fefae0',
+                        softWhite: '#f8f9fa',
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass-card {
+            background: rgba(35, 21, 16, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 163, 115, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(212, 163, 115, 0.45);
+            box-shadow: 0 12px 40px 0 rgba(212, 163, 115, 0.2);
+        }
+
+        .glass-nav {
+            background: rgba(18, 11, 9, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 163, 115, 0.15);
+        }
+
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #120b09;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3a231b;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8c6d58;
+        }
+
+
+        .text-gradient {
+            background: linear-gradient(135deg,
+                    #ffffff 0%,
+                    #fefae0 35%,
+                    #d4a373 75%,
+                    #8c6d58 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-espresso text-softWhite font-sans selection:bg-amberGlow/30 selection:text-creme overflow-x-hidden relative">
+
+
+    <canvas id="galaxy-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300 px-6 py-4">
+        <section class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#home" class="flex items-center space-x-3 group">
+                <span
+                    class="w-10 h-10 rounded-full bg-gradient-to-tr from-chocolate via-cappuccino to-amberGlow p-[1px] flex items-center justify-center transition-transform group-hover:scale-105">
+                    <span
+                        class="w-full h-full bg-espresso rounded-full flex items-center justify-center font-serif text-amberGlow font-bold text-xl">M</span>
+                </span>
+                <span
+                    class="font-serif font-bold text-lg tracking-wider text-softWhite group-hover:text-amberGlow transition-colors">My<span
+                        class="text-amberGlow">.</span>Portfolio</span>
+            </a>
+
+
+            <nav class="hidden md:flex items-center space-x-7 text-sm font-medium">
+                <a href="#home" class="text-softWhite/80 hover:text-amberGlow transition-colors py-1">Home</a>
+                <a href="#about" class="text-softWhite/80 hover:text-amberGlow transition-colors py-1">About</a>
+                <a href="#skills" class="text-softWhite/80 hover:text-amberGlow transition-colors py-1">Skills</a>
+                <a href="#projects" class="text-softWhite/80 hover:text-amberGlow transition-colors py-1">Projects</a>
+                <a href="#achievements"
+                    class="text-softWhite/80 hover:text-amberGlow transition-colors py-1">Achievements</a>
+                <a href="#contact"
+                    class="px-5 py-2.5 rounded-full border border-amberGlow/40 bg-amberGlow/10 text-amberGlow hover:bg-amberGlow hover:text-espresso font-semibold transition-all duration-300 shadow-lg hover:shadow-amberGlow/20">Contact
+                    Me</a>
+            </nav>
+
+
+            <button id="menu-toggle" class="md:hidden text-softWhite hover:text-amberGlow focus:outline-none p-2"
+                aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </section>
+
+
+        <nav id="mobile-menu"
+            class="hidden md:hidden glass-card border-x-0 border-t-0 mt-4 px-6 py-6 space-y-4 transition-all duration-300">
+            <a href="#home"
+                class="mobile-nav-link block text-lg font-medium text-softWhite/90 hover:text-amberGlow">Home</a>
+            <a href="#about"
+                class="mobile-nav-link block text-lg font-medium text-softWhite/90 hover:text-amberGlow">About</a>
+            <a href="#skills"
+                class="mobile-nav-link block text-lg font-medium text-softWhite/90 hover:text-amberGlow">Skills</a>
+            <a href="#projects"
+                class="mobile-nav-link block text-lg font-medium text-softWhite/90 hover:text-amberGlow">Projects</a>
+            <a href="#achievements"
+                class="mobile-nav-link block text-lg font-medium text-softWhite/90 hover:text-amberGlow">Achievements</a>
+            <a href="#contact"
+                class="mobile-nav-link inline-block px-6 py-2.5 rounded-full border border-amberGlow bg-amberGlow/10 text-amberGlow font-medium">Contact
+                Me</a>
+        </nav>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-6">
+
+
+        <section id="home" class="min-h-screen flex items-center justify-center pt-24 pb-16">
+            <section class="grid md:grid-cols-2 gap-12 items-center w-full">
+                <article class="space-y-6 text-center md:text-left">
+                    <span
+                        class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-card border-amberGlow/30 text-amberGlow text-xs uppercase tracking-widest font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-amberGlow animate-ping"></span>
+                        <span>IT Students</span>
+                    </span>
+
+                    <h1
+                        class="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold tracking-tight text-gradient leading-tight">
+                        Hello, I'm Kristine Joy Gregorio <br><br><span class="italic font-light text-softWhite">a future
+                            professional it developer</span>
+                    </h1>
+
+                    <p
+                        class="text-softWhite/70 text-base sm:text-lg max-w-xl mx-auto md:mx-0 font-light leading-relaxed">
+                        A IT student who enjoys learning,exploring neew ideas,and developing creative skills for the
+                        future
+                    </p>
+
+                    <nav class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
+                        <a href="#projects"
+                            class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-amberGlow via-cappuccino to-chocolate text-espresso font-bold text-sm tracking-wide uppercase hover:opacity-95 transition-all shadow-lg hover:shadow-amberGlow/30 hover:-translate-y-0.5 text-center">
+                            Explore Projects <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                        <a href="#contact"
+                            class="w-full sm:w-auto px-8 py-4 rounded-full glass-card border-amberGlow/30 hover:bg-amberGlow/10 text-softWhite font-semibold text-sm tracking-wide uppercase transition-all text-center">
+                            Contact Me
+                        </a>
+                    </nav>
+
+
+                    <nav class="flex items-center justify-center md:justify-start space-x-5 pt-6">
+                        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
+                            class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-softWhite/70 hover:text-amberGlow hover:border-amberGlow transition-all hover:-translate-y-1"
+                            aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f text-lg"></i>
+                        </a>
+
+
+                        <a href="joyyaaanggggg@gmail.com"
+                            class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-softWhite/70 hover:text-amberGlow hover:border-amberGlow transition-all hover:-translate-y-1"
+                            aria-label="Email">
+                            <i class="fa-solid fa-envelope text-lg"></i>
+                        </a>
+                    </nav>
+                </article>
+
+
+                <figure class="flex justify-center relative">
+                    <span class="relative w-72 h-72 sm:w-96 sm:h-96 flex items-center justify-center">
+                        <span
+                            class="absolute inset-0 rounded-full bg-gradient-to-tr from-chocolate via-cappuccino to-amberGlow blur-3xl opacity-30 animate-pulse-slow"></span>
+                        <span
+                            class="absolute inset-2 border border-dashed border-amberGlow/30 rounded-full animate-[spin_30s_linear_infinite]"></span>
+                        <span
+                            class="absolute inset-8 border border-cappuccino/20 rounded-full animate-[spin_45s_linear_infinite_reverse]"></span>
+
+                        <span
+                            class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full p-2 glass-card animate-float block">
+                            <span
+                                class="w-full h-full rounded-full overflow-hidden border border-amberGlow/20 relative group block">
+                                <img src="843278072_1644190786801760_7878317177478213059_n.jpg" alt="Profile Avatar"
+                                    class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100">
+                                <span
+                                    class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-60"></span>
+                            </span>
+                        </span>
+
+                        <figcaption
+                            class="absolute -bottom-4 -right-2 glass-card px-4 py-3 rounded-2xl flex items-center space-x-3 border-amberGlow/30 animate-bounce"
+                            style="animation-duration: 4s;">
+                            <span
+                                class="w-8 h-8 rounded-full bg-amberGlow/20 flex items-center justify-center text-amberGlow">
+                                <i class="fa-solid fa-code text-sm"></i>
+                            </span>
+                            <span>
+                                <p class="text-xs font-bold text-creme">
+                                    NORTHEASTERN COLLEGE</p>
+                                <p class="text-xs font-bold text-creme">Kristine
+                                    joy Gregorio</p>
+                                <p class="text-xs font-bold text-creme">BSIT 1D</p>
+
+                            </span>
+                        </figcaption>
+                    </span>
+                </figure>
+            </section>
+        </section>
+        <line>
+
+        </line>
+
+
+        <section id="about" class="py-20 max-w-5xl mx-auto">
+            <header class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-amberGlow mb-2">Introduction</h2>
+                <h3 class="text-3xl sm:text-4xl font-serif font-bold text-softWhite">About Me</h3>
+                <span
+                    class="block w-16 h-1 bg-gradient-to-r from-amberGlow to-chocolate mx-auto mt-4 rounded-full"></span>
+            </header>
+
+            <section class="grid md:grid-cols-12 gap-8 items-center">
+                <article class="md:col-span-7 glass-card p-8 rounded-3xl space-y-4">
+                    <h4 class="text-2xl font-serif text-creme">LEARNING,GROWING & CREATING MY OWN PATH</h4>
+                    <p class="text-softWhite/70 text-sm font-light leading-relaxed">
+                        I am a friendly and simple person who enjoys spending time with the people I am comfortable
+                        with. I may be quiet at first, but I can be talkative and funny once I get close to someone. I
+                        always try my best in everything I do, and I am willing to learn from my mistakes. I also enjoy
+                        playing volleyball, a sport that I am passionate about and have worked hard to improve in. It is
+                        something I truly enjoy, and it has taught me the importance of teamwork, discipline, and
+                        patience. Aside from my hobbies, I value my family and always try to show them how much I care.
+                        I believe that spending time with them and being there when they need me are important parts of
+                        my life. I also appreciate the people who support and understand me, and I try to give them the
+                        same care and effort in return.
+                    </p>
+                    <p class="text-softWhite/70 text-sm font-light leading-relaxed">
+                        As an IT student, I am still learning and exploring more about technology, especially computers
+                        and programming. Sometimes, I find things challenging, but I see them as opportunities to
+                        improve my skills and knowledge. I know that there is still a lot for me to learn, so I try to
+                        stay open to new experiences and ideas. I may not be the best at everything, but I am willing to
+                        put in the effort and keep improving. I believe that being patient, hardworking, responsible,
+                        and caring can help me become a better person and achieve my goals. In the future, I hope to
+                        grow not only in my studies but also as a person, while making my family proud and doing the
+                        things that make me happy.
+                    </p>
+
+                </article>
+
+
+                <aside class="md:col-span-5 grid grid-cols-2 gap-4">
+                    <article class="glass-card p-6 rounded-2xl text-center space-y-1">
+                        <h4 class="text-3xl sm:text-4xl font-serif font-bold text-amberGlow"><span class="counter"
+                                data-target="3">0</span>+</h4>
+                        <p class="text-xs text-softWhite/70 uppercase tracking-wider font-semibold">months Experience
+                        </p>
+                    </article>
+                    <article class="glass-card p-6 rounded-2xl text-center space-y-1">
+                        <h4 class="text-3xl sm:text-4xl font-serif font-bold text-amberGlow"><span class="counter"
+                                data-target="5">0</span>+</h4>
+                        <p class="text-xs text-softWhite/70 uppercase tracking-wider font-semibold">Projects Built</p>
+                    </article>
+
+                </aside>
+            </section>
+        </section>
+
+
+        <section id="skills" class="py-20 max-w-5xl mx-auto">
+            <header class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-amberGlow mb-2">Capabilities</h2>
+                <h3 class="text-3xl sm:text-4xl font-serif font-bold text-softWhite">Technical Skills</h3>
+                <span
+                    class="block w-16 h-1 bg-gradient-to-r from-amberGlow to-chocolate mx-auto mt-4 rounded-full"></span>
+            </header>
+
+            <ul class="grid md:grid-cols-2 gap-6">
+
+                <li class="glass-card p-6 rounded-2xl space-y-3 list-none">
+                    <section class="flex justify-between items-center text-sm">
+                        <span class="font-semibold text-creme flex items-center gap-2">
+                            <i class="fa-brands fa-react text-amberGlow"></i> HTML
+                        </span>
+                        <span class="text-amberGlow font-bold">40%</span>
+                    </section>
+                    <span class="w-full bg-chocolate/50 h-2.5 rounded-full overflow-hidden p-[1px] block">
+                        <span
+                            class="bg-gradient-to-r from-cappuccino to-amberGlow h-full rounded-full w-[95%] block"></span>
+                    </span>
+                </li>
+
+
+                <li class="glass-card p-6 rounded-2xl space-y-3 list-none">
+                    <section class="flex justify-between items-center text-sm">
+                        <span class="font-semibold text-creme flex items-center gap-2">
+                            <i class="fa-solid fa-cube text-amberGlow"></i> CREATIVITY
+                        </span>
+                        <span class="text-amberGlow font-bold">75%</span>
+                    </section>
+                    <span class="w-full bg-chocolate/50 h-2.5 rounded-full overflow-hidden p-[1px] block">
+                        <span
+                            class="bg-gradient-to-r from-cappuccino to-amberGlow h-full rounded-full w-[88%] block"></span>
+                    </span>
+                </li>
+
+
+                <li class="glass-card p-6 rounded-2xl space-y-3 list-none">
+                    <section class="flex justify-between items-center text-sm">
+                        <span class="font-semibold text-creme flex items-center gap-2">
+                            <i class="fa-brands fa-node-js text-amberGlow"></i> COMMUNICATION
+                        </span>
+                        <span class="text-amberGlow font-bold">80%</span>
+                    </section>
+                    <span class="w-full bg-chocolate/50 h-2.5 rounded-full overflow-hidden p-[1px] block">
+                        <span
+                            class="bg-gradient-to-r from-cappuccino to-amberGlow h-full rounded-full w-[90%] block"></span>
+                    </span>
+                </li>
+
+
+                <li class="glass-card p-6 rounded-2xl space-y-3 list-none">
+                    <section class="flex justify-between items-center text-sm">
+                        <span class="font-semibold text-creme flex items-center gap-2">
+                            <i class="fa-solid fa-palette text-amberGlow"></i> PLAYING VOLLEYBALL
+                        </span>
+                        <span class="text-amberGlow font-bold">92%</span>
+                    </section>
+                    <span class="w-full bg-chocolate/50 h-2.5 rounded-full overflow-hidden p-[1px] block">
+                        <span
+                            class="bg-gradient-to-r from-cappuccino to-amberGlow h-full rounded-full w-[92%] block"></span>
+                    </span>
+                </li>
+            </ul>
+        </section>
+
+        <section id="projects" class="py-20">
+            <header class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-amberGlow mb-2">Portfolio</h2>
+                <h3 class="text-3xl sm:text-4xl font-serif font-bold text-softWhite">Featured Projects</h3>
+                <span
+                    class="block w-16 h-1 bg-gradient-to-r from-amberGlow to-chocolate mx-auto mt-4 rounded-full"></span>
+            </header>
+
+            <nav class="flex flex-wrap justify-center gap-3 mb-12">
+                <button
+                    class="filter-btn active px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all bg-amberGlow text-espresso"
+                    data-filter="all">All</button>
+                <button
+                    class="filter-btn glass-card px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider text-softWhite hover:text-amberGlow transition-all"
+                    data-filter="web">Exercise</button>
+
+                <button
+                    class="filter-btn glass-card px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider text-softWhite hover:text-amberGlow transition-all"
+                    data-filter="graphics">Activity</button>
+            </nav>
+
+            <section class="grid md:grid-cols-3 lg:grid-cols-4 gap-9">
+
+                <article
+                    class="project-card glass-card rounded-3xl overflow-hidden group hover:-translate-y-2 transition-all duration-300"
+                    data-category="web">
+                    <figure class="h-52 relative overflow-hidden">
+                        <img src="855403188_28575445755457344_8806974884701680249_n.jpg" alt="Cosmic Web App"
+                            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        <span
+                            class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></span>
+                    </figure>
+                    <section class="p-6 space-y-2">
+
+                        <h4 class="text-xl font-serif text-creme font-bold">Exercise 1</h4>
+                        <p class="text-xs text-softWhite/70 font-light leading-relaxed">The basic function of hthml.</p>
+                        <button
+                            onclick="openModal('Exercise 1', 'The basic function of html.', '855403188_28575445755457344_8806974884701680249_n.jpg')"
+                            class="inline-flex items-center text-xs font-semibold text-amberGlow hover:underline pt-2">
+                            View Project <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </button>
+                    </section>
+                </article>
+
+                <article
+                    class="project-card glass-card rounded-3xl overflow-hidden group hover:-translate-y-2 transition-all duration-300"
+                    data-category="web">
+                    <figure class="h-52 relative overflow-hidden">
+                        <img src="852692029_1669220424907816_7486114468444616471_n.jpg" alt="Cosmic Web App"
+                            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        <span
+                            class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></span>
+                    </figure>
+                    <section class="p-6 space-y-3">
+
+                        <h4 class="text-xl font-serif text-creme font-bold">Exercise 2</h4>
+                        <p class="text-xs text-softWhite/70 font-light leading-relaxed">Learning html and able to creat
+                            web pages like a pro.</p>
+                        <button
+                            onclick="openModal('Exercise 2', 'Learning html and able to creat web pages like a pro.', '852692029_1669220424907816_7486114468444616471_n.jpg')"
+                            class="inline-flex items-center text-xs font-semibold text-amberGlow hover:underline pt-2">
+                            View Project <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </button>
+                    </section>
+                </article>
+
+                <article
+                    class="project-card glass-card rounded-3xl overflow-hidden group hover:-translate-y-2 transition-all duration-300"
+                    data-category="web">
+                    <figure class="h-52 relative overflow-hidden">
+                        <img src="853619191_2208584309700035_2421994196347533051_n.jpg" alt="Cosmic Web App"
+                            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        <span
+                            class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></span>
+                    </figure>
+                    <section class="p-6 space-y-3">
+
+                        <h4 class="text-xl font-serif text-creme font-bold">Exercise 3</h4>
+                        <p class="text-xs text-softWhite/70 font-light leading-relaxed">Learning html and able to creat
+                            webpages like a beginner pro.</p>
+                        <button
+                            onclick="openModal('Exercise 3', 'Learning html and able to creat webpages like a beginner pro.', '853619191_2208584309700035_2421994196347533051_n.jpg')"
+                            class="inline-flex items-center text-xs font-semibold text-amberGlow hover:underline pt-2">
+                            View Peoject<i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </button>
+                    </section>
+                </article>
+
+                <article
+                    class="project-card glass-card rounded-3xl overflow-hidden group hover:-translate-y-2 transition-all duration-300"
+                    data-category="web">
+                    <figure class="h-52 relative overflow-hidden">
+                        <img src="850998827_1470015368377091_3402976466002466428_n.jpg" alt="Cosmic Web App"
+                            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        <span
+                            class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></span>
+                    </figure>
+                    <section class="p-6 space-y-3">
+
+                        <h4 class="text-xl font-serif text-creme font-bold">Exercise 4</h4>
+                        <p class="text-xs text-softWhite/70 font-light leading-relaxed">Learning how to use HTML
+                            tags,how to use HTML colors and how to creat kists.</p>
+                        <button
+                            onclick="openModal('Exercise 4', 'Learning how to use HTML tags,how to use HTML color and how to craet kists.', '850998827_1470015368377091_3402976466002466428_n.jpg')"
+                            class="inline-flex items-center text-xs font-semibold text-amberGlow hover:underline pt-2">
+                            View Project <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </button>
+                    </section>
+                </article>
+
+                <article
+                    class="project-card glass-card rounded-3xl overflow-hidden group hover:-translate-y-2 transition-all duration-300"
+                    data-category="web">
+                    <figure class="h-52 relative overflow-hidden">
+                        <img src="859593338_2130724834197867_6351499835655251081_n.jpg" alt="Cosmic Web App"
+                            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        <span
+                            class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></span>
+                    </figure>
+                    <section class="p-6 space-y-3">
+
+                        <h4 class="text-xl font-serif text-creme font-bold">Exercise 5</h4>
+                        <p class="text-xs text-softWhite/70 font-light leading-relaxed">Created my first webpage like a
+                            pro</p>
+                        <button
+                            onclick="openModal('Exercise 5', 'Creat my first webpage like a pro.', '859593338_2130724834197867_6351499835655251081_n.jpg')"
+                            class="inline-flex items-center text-xs font-semibold text-amberGlow hover:underline pt-2">
+                            View Prpject<i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </button>
+                    </section>
+                </article>
+
+
+
+                <article
+                    class="project-card glass-card rounded-3xl overflow-hidden group hover:-translate-y-2 transition-all duration-300"
+                    data-category="graphics">
+                    <figure class="h-52 relative overflow-hidden">
+                        <img src="26e750b1-dc89-46e9-8250-bda7f34974e5.jpg" alt="Starfield Canvas Visualizer"
+                            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        <span
+                            class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></span>
+                    </figure>
+                    <section class="p-6 space-y-3">
+
+                        <h4 class="text-xl font-serif text-creme font-bold">Activity 1</h4>
+                        <p class="text-xs text-softWhite/70 font-light leading-relaxed">This activity we created a
+                            table.</p>
+                        <button
+                            onclick="openModal('Activity 1', 'This activity we craet a table ', '26e750b1-dc89-46e9-8250-bda7f34974e5.jpg')"
+                            class="inline-flex items-center text-xs font-semibold text-amberGlow hover:underline pt-2">
+                            View Project <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </button>
+                    </section>
+                </article>
+
+                <article
+                    class="project-card glass-card rounded-3xl overflow-hidden group hover:-translate-y-2 transition-all duration-300"
+                    data-category="graphics">
+                    <figure class="h-52 relative overflow-hidden">
+                        <img src="853748335_2338782900213782_5590918167987121288_n.jpg"
+                            alt="Starfield Canvas Visualizer"
+                            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        <span
+                            class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></span>
+                    </figure>
+                    <section class="p-6 space-y-3">
+
+                        <h4 class="text-xl font-serif text-creme font-bold">Activity 2</h4>
+                        <p class="text-xs text-softWhite/70 font-light leading-relaxed">We creeat our Facebook logo.</p>
+                        <button
+                            onclick="openModal('Activity 2', 'We creat our Facebook logo.', '853748335_2338782900213782_5590918167987121288_n.jpg')"
+                            class="inline-flex items-center text-xs font-semibold text-amberGlow hover:underline pt-2">
+                            View Project <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </button>
+                    </section>
+                </article>
+
+                <article
+                    class="project-card glass-card rounded-3xl overflow-hidden group hover:-translate-y-2 transition-all duration-300"
+                    data-category="graphics">
+                    <figure class="h-52 relative overflow-hidden">
+                        <img src="852482179_1441796451411160_833936962024406167_n.jpg" alt="Starfield Canvas Visualizer"
+                            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        <span
+                            class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></span>
+                    </figure>
+                    <section class="p-6 space-y-3">
+
+                        <h4 class="text-xl font-serif text-creme font-bold">Activity 3</h4>
+                        <p class="text-xs text-softWhite/70 font-light leading-relaxed"></p>Image Searching Website.</p>
+                        <button
+                            onclick="openModal('Activity 3', 'Image Searching Website.', '852482179_1441796451411160_833936962024406167_n.jpg')"
+                            class="inline-flex items-center text-xs font-semibold text-amberGlow hover:underline pt-2">
+                            View Project <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </button>
+                    </section>
+                </article>
+            </section>
+        </section>
+
+
+
+        <section id="achievements" class="py-20 max-w-5xl mx-auto">
+            <header class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-amberGlow mb-2">Recognitions</h2>
+                <h3 class="text-3xl sm:text-4xl font-serif font-bold text-softWhite">Achievements & Awards</h3>
+                <span
+                    class="block w-16 h-1 bg-gradient-to-r from-amberGlow to-chocolate mx-auto mt-4 rounded-full"></span>
+            </header>
+
+
+            <section class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <article
+                    class="project-card glass-card rounded-3xl overflow-hidden group hover:-translate-y-2 transition-all duration-300"
+                    data-category="web">
+                    <figure class="h-52 relative overflow-hidden">
+                        <img src="851864197_2362459514524904_614680339359110413_n.jpg" alt="Cosmic Web App"
+                            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+
+                        <span
+                            class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></span>
+                    </figure>
+                    <section class="p-6 space-y-3">
+
+                        <h4 class="text-xl font-serif text-creme font-bold">Academic Achievement</h4>
+                        <p class="text-xs text-softWhite/70 font-light leading-relaxed">Successfully graduate
+                            from Grade
+                            12,marking a important milestone in completing senior high school and preparing for
+                            future
+                            acadenic and career opportunities.</p>
+                        <button
+                            onclick="openModal('Academic Achievement', 'Successfully graduate from Grade12, marking a important milestone in completing senior high schooland preparing for future academic and career opportunities', '851864197_2362459514524904_614680339359110413_n.jpg')"
+                            class="inline-flex items-center text-xs font-semibold text-amberGlow hover:underline pt-2">
+                            View Achievement <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </button>
+                    </section>
+                </article>
+
+                <article
+                    class="project-card glass-card rounded-3xl overflow-hidden group hover:-translate-y-2 transition-all duration-300"
+                    data-category="graphics">
+                    <figure class="h-52 relative overflow-hidden">
+                        <img src="855403197_2539298023240450_733562265711191300_n.jpg" alt="Starfield Canvas Visualizer"
+                            class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        <span
+                            class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></span>
+                    </figure>
+                    <section class="p-6 space-y-3">
+
+                        <h4 class="text-xl font-serif text-creme font-bold">With Honors</h4>
+                        <p class="text-xs text-softWhite/70 font-light leading-relaxed">Recognized for academic
+                            excellence,dedication,and hard work throughout senior high school,demonstrating
+                            commitment
+                            to learning and achieving academic goals.</p>
+                        <button
+                            onclick="openModal('With Honors', 'Recognized for academice xcellence,dedication,and hard work throughout senior high school,demonstrating commitment to learning and achieving academic goals.', '855403197_2539298023240450_733562265711191300_n.jpg')"
+                            class="inline-flex items-center text-xs font-semibold text-amberGlow hover:underline pt-2">
+                            View Achievement <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </button>
+                    </section>
+                </article>
+
+                <article
+                    class="project-card glass-card rounded-3xl overflow-hidden group hover:-translate-y-2 transition-all duration-300"
+                    data-category="design">
+                    <figure class="h-52 relative overflow-hidden">
+                        <img src="851175119_1849906426423223_715099442679379269_n.jpg" alt="UI Design Concept"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span
+                            class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent opacity-80"></span>
+                    </figure>
+                    <section class="p-6 space-y-3">
+
+                        <h4 class="text-xl font-serif text-creme font-bold">Volleyball</h4>
+                        <p class="text-xs text-softWhite/70 font-light leading-relaxed">Awarded Most Valuable
+                            Player in
+                            the volleyball Inetrtown Tournamnet for outstanding performance and teamwork. </p>
+                        <button
+                            onclick="openModal('Volleyball', 'Awarded Most Valuable Player in Inetrtown Tournamnet for outstanding performance and teamwork.', '851175119_1849906426423223_715099442679379269_n.jpg')"
+                            class="inline-flex items-center text-xs font-semibold text-amberGlow hover:underline pt-2">
+                            View Achievement<i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </button>
+                    </section>
+                </article>
+            </section>
+        </section>
+
+
+
+        <section id="contact" class="py-20">
+            <header class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-amberGlow mb-2">Get In Touch</h2>
+                <h3 class="text-3xl sm:text-4xl font-serif font-bold text-softWhite">Contact Me</h3>
+                <span
+                    class="block w-16 h-1 bg-gradient-to-r from-amberGlow to-chocolate mx-auto mt-4 rounded-full"></span>
+            </header>
+
+            <section class="grid lg:grid-cols-12 gap-8 items-start max-w-6xl mx-auto">
+
+
+                <address class="lg:col-span-5 space-y-4 not-italic">
+                    <h4 class="text-lg font-serif font-bold text-creme mb-2">Connect Directly</h4>
+
+
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
+                        class="glass-card p-5 rounded-2xl flex items-center space-x-4 hover:border-amberGlow transition-all block group">
+                        <span
+                            class="w-12 h-12 rounded-xl bg-amberGlow/10 border border-amberGlow/30 flex items-center justify-center text-amberGlow group-hover:scale-110 transition-transform shrink-0">
+                            <i class="fa-brands fa-facebook-f text-xl"></i>
+                        </span>
+                        <section>
+                            <p class="text-[10px] font-semibold text-amberGlow uppercase tracking-wider">
+                                Facebook</p>
+                            <p class="text-sm font-semibold text-creme">Krisine joy Gregorio</p>
+                        </section>
+                    </a>
+
+
+
+                    <a href="joyyaaanggggg@gamil.com"
+                        class="glass-card p-5 rounded-2xl flex items-center space-x-4 hover:border-amberGlow transition-all block group">
+                        <span
+                            class="w-12 h-12 rounded-xl bg-amberGlow/10 border border-amberGlow/30 flex items-center justify-center text-amberGlow group-hover:scale-110 transition-transform shrink-0">
+                            <i class="fa-solid fa-envelope text-xl"></i>
+                        </span>
+                        <section>
+                            <p class="text-[10px] font-semibold text-amberGlow uppercase tracking-wider">Email
+                            </p>
+                            <p class="text-sm font-semibold text-creme">joyyaaanggggg@gamail.com/p>
+                        </section>
+                    </a>
+                </address>
+
+
+                <form id="contact-form" class="lg:col-span-7 glass-card p-8 rounded-3xl space-y-6">
+                    <h4 class="text-lg font-serif font-bold text-creme">Send a Message</h4>
+                    <section class="grid sm:grid-cols-2 gap-6">
+                        <label class="block space-y-2">
+                            <span class="block text-xs font-semibold text-amberGlow uppercase tracking-wider">Your
+                                Name</span>
+                            <input type="text" required placeholder="John Doe"
+                                class="w-full px-4 py-3 rounded-xl bg-chocolate/30 border border-amberGlow/20 text-softWhite placeholder-softWhite/30 focus:outline-none focus:border-amberGlow transition-colors">
+                        </label>
+                        <label class="block space-y-2">
+                            <span class="block text-xs font-semibold text-amberGlow uppercase tracking-wider">Email
+                                Address</span>
+                            <input type="email" required placeholder="john@example.com"
+                                class="w-full px-4 py-3 rounded-xl bg-chocolate/30 border border-amberGlow/20 text-softWhite placeholder-softWhite/30 focus:outline-none focus:border-amberGlow transition-colors">
+                        </label>
+                    </section>
+
+                    <label class="block space-y-2">
+                        <span class="block text-xs font-semibold text-amberGlow uppercase tracking-wider">Subject</span>
+                        <input type="text" required placeholder="Project Inquiry / Collaboration"
+                            class="w-full px-4 py-3 rounded-xl bg-chocolate/30 border border-amberGlow/20 text-softWhite placeholder-softWhite/30 focus:outline-none focus:border-amberGlow transition-colors">
+                    </label>
+
+                    <label class="block space-y-2">
+                        <span class="block text-xs font-semibold text-amberGlow uppercase tracking-wider">Message</span>
+                        <textarea rows="4" required placeholder="Tell me about your project or idea..."
+                            class="w-full px-4 py-3 rounded-xl bg-chocolate/30 border border-amberGlow/20 text-softWhite placeholder-softWhite/30 focus:outline-none focus:border-amberGlow transition-colors resize-none"></textarea>
+                    </label>
+
+                    <button type="submit"
+                        class="w-full py-4 rounded-xl bg-gradient-to-r from-amberGlow via-cappuccino to-chocolate text-espresso font-bold text-sm tracking-wide uppercase hover:opacity-95 transition-all shadow-lg hover:shadow-amberGlow/20">
+                        Send Message <i class="fa-solid fa-paper-plane ml-2"></i>
+                    </button>
+
+                    <p id="form-status" class="text-xs text-center text-amberGlow hidden">Thank you! Your
+                        message has
+                        been sent successfully.</p>
+                </form>
+            </section>
+        </section>
+
+    </main>
+
+
+    <footer class="border-t border-amberGlow/10 py-10 px-6 relative z-10 glass-nav">
+        <section class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <span class="font-serif font-bold text-lg text-softWhite">KRISTINE<span
+                    class="text-amberGlow">.</span>GREGORIO</span>
+
+
+            <nav class="flex space-x-5 text-softWhite/70">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+                    class="hover:text-amberGlow transition-colors" aria-label="Facebook"><i
+                        class="fa-brands fa-facebook-f"></i></a>
+                <a href="mailto:joyyaaanggggg@gamail,com.dev" class="hover:text-amberGlow transition-colors"
+                    aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </nav>
+
+            <p class="text-xs text-softWhite/50 font-light">
+                &copy; Gregorio kristine Joy G.
+            </p>
+        </section>
+    </footer>
+
+
+    <dialog id="project-modal"
+        class="fixed inset-0 z-50 bg-espresso/80 backdrop-blur-md hidden flex items-center justify-center p-4 w-full h-full border-none">
+        <article class="glass-card max-w-2xl w-full rounded-3xl overflow-hidden border border-amberGlow/40 relative">
+            <button onclick="closeModal()"
+                class="absolute top-4 right-4 w-8 h-8 rounded-full bg-espresso/60 flex items-center justify-center text-softWhite hover:text-amberGlow z-10"
+                aria-label="Close modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <figure class="h-64 relative">
+                <img id="modal-img" src="" alt="Modal Project Image" class="w-full h-full object-cover">
+                <span class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-transparent"></span>
+            </figure>
+            <section class="p-6 space-y-4">
+                <h3 id="modal-title" class="text-2xl font-serif text-creme"></h3>
+                <p id="modal-desc" class="text-xs text-softWhite/80 leading-relaxed font-light"></p>
+                <footer class="pt-4 flex justify-end">
+                    <button onclick="closeModal()"
+                        class="px-6 py-2 rounded-full bg-amberGlow text-espresso font-semibold text-xs">Close
+                        Preview</button>
+                </footer>
+            </section>
+        </article>
+    </dialog>
+
+
+    <script>
+
+        const canvas = document.getElementById('galaxy-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+        let stars = [];
+        let nebulae = [];
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initElements();
+        }
+
+        class Star {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 1.8 + 0.2;
+                this.alpha = Math.random() * 0.8 + 0.2;
+                this.speed = Math.random() * 0.05 + 0.01;
+                const colors = ['#ffffff', '#fefae0', '#d4a373', '#8c6d58', '#f8f9fa'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.twinkleSpeed = Math.random() * 0.02 + 0.005;
+            }
+
+            update() {
+                this.alpha += Math.sin(Date.now() * this.twinkleSpeed) * 0.01;
+                if (this.alpha <= 0.1) this.alpha = 0.2;
+                if (this.alpha >= 1) this.alpha = 0.9;
+            }
+
+            draw() {
+                const offsetX = (mouse.x - width / 2) * this.speed * 0.02;
+                const offsetY = (mouse.y - height / 2) * this.speed * 0.02;
+
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x + offsetX, this.y + offsetY, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        class NebulaGlow {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.radius = Math.random() * 300 + 150;
+                const colors = [
+                    'rgba(58, 35, 27, 0.18)',
+                    'rgba(140, 109, 88, 0.12)',
+                    'rgba(212, 163, 115, 0.08)',
+                    'rgba(35, 21, 16, 0.25)'
+                ];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.speed = Math.random() * 0.02 + 0.005;
+            }
+
+            draw() {
+                const offsetX = (mouse.x - width / 2) * this.speed * 0.05;
+                const offsetY = (mouse.y - height / 2) * this.speed * 0.05;
+
+                const gradient = ctx.createRadialGradient(
+                    this.x + offsetX, this.y + offsetY, 0,
+                    this.x + offsetX, this.y + offsetY, this.radius
+                );
+                gradient.addColorStop(0, this.color);
+                gradient.addColorStop(1, 'transparent');
+
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x + offsetX, this.y + offsetY, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initElements() {
+            stars = [];
+            nebulae = [];
+            const starCount = Math.floor((width * height) / 3000);
+            for (let i = 0; i < starCount; i++) {
+                stars.push(new Star());
+            }
+            for (let i = 0; i < 6; i++) {
+                nebulae.push(new NebulaGlow());
+            }
+        }
+
+        function animateGalaxy() {
+            ctx.clearRect(0, 0, width, height);
+
+            mouse.x += (mouse.targetX - mouse.x) * 0.05;
+            mouse.y += (mouse.targetY - mouse.y) * 0.05;
+
+            nebulae.forEach(n => n.draw());
+            stars.forEach(s => {
+                s.update();
+                s.draw();
+            });
+
+            requestAnimationFrame(animateGalaxy);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('mousemove', (e) => {
+            mouse.targetX = e.clientX;
+            mouse.targetY = e.clientY;
+        });
+
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('active', 'bg-amberGlow', 'text-espresso');
+                    b.classList.add('glass-card', 'text-softWhite');
+                });
+                btn.classList.add('active', 'bg-amberGlow', 'text-espresso');
+                btn.classList.remove('glass-card', 'text-softWhite');
+
+                const filter = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+
+        const counters = document.querySelectorAll('.counter');
+        let animated = false;
+
+        function checkCounters() {
+            const scrollPosition = window.innerHeight + window.scrollY;
+            const aboutSection = document.getElementById('about');
+
+            if (aboutSection && scrollPosition > aboutSection.offsetTop + 100 && !animated) {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const speed = target / 30;
+
+                    const updateCount = () => {
+                        count += speed;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count);
+                            setTimeout(updateCount, 40);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+                animated = true;
+            }
+        }
+
+        window.addEventListener('scroll', checkCounters);
+
+
+        const modal = document.getElementById('project-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+
+        function openModal(title, desc, imgSrc) {
+            modalTitle.innerText = title;
+            modalDesc.innerText = desc;
+            modalImg.src = imgSrc;
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+
+        const contactForm = document.getElementById('contact-form');
+        const formStatus = document.getElementById('form-status');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formStatus.classList.remove('hidden');
+            contactForm.reset();
+            setTimeout(() => {
+                formStatus.classList.add('hidden');
+            }, 5000);
+        });
+
+
+        window.onload = function () {
+            resizeCanvas();
+            animateGalaxy();
+        };
+    </script>
+</body>
+
+</html>
